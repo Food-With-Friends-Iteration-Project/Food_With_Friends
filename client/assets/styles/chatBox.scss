@@ -1,0 +1,23 @@
+.chat-box {
+  height: 90%;
+  position: relative;
+  form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    input {
+      width: 90%;
+      height: 40px;
+      margin: 0 auto;
+    }
+    button {
+      width: 9%;
+      background-color: $green;
+      padding: 10px;
+      margin: 0 auto;
+    }
+  }
+}

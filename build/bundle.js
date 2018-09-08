@@ -154,6 +154,38 @@ exports.default = App;
 
 /***/ }),
 
+/***/ "./client/src/components/chatBox.component.js":
+/*!****************************************************!*\
+  !*** ./client/src/components/chatBox.component.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+var chatBox = function chatBox() {
+  return _react2.default.createElement('div', { className: 'chat-box' }, _react2.default.createElement('div', { id: 'messages' }), _react2.default.createElement('form', { action: '' }, _react2.default.createElement('input', { id: 'm', autoComplete: 'off' }), _react2.default.createElement('button', { className: 'button' }, 'Send')));
+};
+
+exports.default = chatBox;
+
+/***/ }),
+
 /***/ "./client/src/components/findFriends.component.js":
 /*!********************************************************!*\
   !*** ./client/src/components/findFriends.component.js ***!
@@ -173,10 +205,6 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _store = __webpack_require__(/*! ./store */ "./client/src/components/store.js");
-
-var _store2 = _interopRequireDefault(_store);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -301,7 +329,7 @@ var _login = __webpack_require__(/*! ./login.component */ "./client/src/componen
 
 var _login2 = _interopRequireDefault(_login);
 
-var _signUp = __webpack_require__(/*! ./sign-up.component */ "./client/src/components/sign-up.component.js");
+var _signUp = __webpack_require__(/*! ./signUp.component */ "./client/src/components/signUp.component.js");
 
 var _signUp2 = _interopRequireDefault(_signUp);
 
@@ -309,12 +337,16 @@ var _findFriends = __webpack_require__(/*! ./findFriends.component */ "./client/
 
 var _findFriends2 = _interopRequireDefault(_findFriends);
 
+var _chatBox = __webpack_require__(/*! ./chatBox.component */ "./client/src/components/chatBox.component.js");
+
+var _chatBox2 = _interopRequireDefault(_chatBox);
+
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
 }
 
 var Main = function Main() {
-  return _react2.default.createElement('main', null, _react2.default.createElement(_reactRouterDom.Switch, null, _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _login2.default }), _react2.default.createElement(_reactRouterDom.Route, { path: '/sign-up', component: _signUp2.default }), _react2.default.createElement(_reactRouterDom.Route, { path: '/find-friends', component: _findFriends2.default })));
+  return _react2.default.createElement('main', null, _react2.default.createElement(_reactRouterDom.Switch, null, _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _login2.default }), _react2.default.createElement(_reactRouterDom.Route, { path: '/sign-up', component: _signUp2.default }), _react2.default.createElement(_reactRouterDom.Route, { path: '/find-friends', component: _findFriends2.default }), _react2.default.createElement(_reactRouterDom.Route, { path: '/chat-box', component: _chatBox2.default })));
 };
 
 exports.default = Main;
@@ -346,7 +378,7 @@ function _interopRequireDefault(obj) {
 }
 
 var Header = function Header() {
-  return _react2.default.createElement('header', null, _react2.default.createElement('nav', null, _react2.default.createElement('ul', { className: 'main-navigation' }, _react2.default.createElement('li', null, _react2.default.createElement(_reactRouterDom.Link, { to: '/' }, 'Home')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouterDom.Link, { to: '/sign-up' }, 'Sign Up')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouterDom.Link, { to: '/find-friends' }, 'Find Friends')))));
+  return _react2.default.createElement('header', null, _react2.default.createElement('nav', null, _react2.default.createElement('ul', { className: 'main-navigation' }, _react2.default.createElement('li', null, _react2.default.createElement(_reactRouterDom.Link, { to: '/' }, 'Home')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouterDom.Link, { to: '/sign-up' }, 'Sign Up')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouterDom.Link, { to: '/find-friends' }, 'Find Friends')), _react2.default.createElement('li', null, _react2.default.createElement(_reactRouterDom.Link, { to: '/chat-box' }, 'Chat Box')))));
 };
 
 exports.default = Header;
@@ -470,10 +502,10 @@ exports.default = reducers;
 
 /***/ }),
 
-/***/ "./client/src/components/sign-up.component.js":
-/*!****************************************************!*\
-  !*** ./client/src/components/sign-up.component.js ***!
-  \****************************************************/
+/***/ "./client/src/components/signUp.component.js":
+/*!***************************************************!*\
+  !*** ./client/src/components/signUp.component.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -629,7 +661,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\na {\n  text-decoration: none; }\n\n.main-navigation {\n  width: 100%;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n  padding: 5px 0;\n  border-top: 5px solid black;\n  border-bottom: 5px solid black; }\n  .main-navigation a {\n    color: black; }\n\n.main-header {\n  font-size: 4em; }\n\n.button {\n  max-width: 100px;\n  padding: 10px 50px;\n  color: black;\n  margin: 10px auto;\n  border-radius: 5px;\n  font-size: 1em; }\n  .button a {\n    text-decoration: none;\n    color: black; }\n\n.bg-green {\n  background-color: #28a745; }\n\n.bg-blue {\n  background-color: #007bff; }\n\n.main-login-container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%; }\n  .main-login-container .login-box {\n    max-width: 200px;\n    width: 15%;\n    height: auto;\n    text-align: center;\n    border: 2px solid black;\n    padding: 40px 80px;\n    border-radius: 5px; }\n    .main-login-container .login-box .flex-form {\n      display: flex;\n      flex-direction: column; }\n      .main-login-container .login-box .flex-form .form-button {\n        max-width: none;\n        width: 100%; }\n\n.sign-up-container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%; }\n  .sign-up-container .flex-form {\n    display: flex;\n    flex-direction: column;\n    position: relative;\n    width: 250px; }\n    .sign-up-container .flex-form .split-form {\n      display: flex;\n      justify-content: space-between; }\n\n.find-friends-container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column; }\n  .find-friends-container .find-friend-box {\n    height: 80%;\n    width: 30%;\n    border: 2px solid black; }\n    .find-friends-container .find-friend-box .friend-box {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      font-size: 1.5em;\n      padding: 10px;\n      border-bottom: 2px solid black; }\n      .find-friends-container .find-friend-box .friend-box .inner-box {\n        width: 35%;\n        display: flex;\n        justify-content: space-between;\n        align-items: center; }\n      .find-friends-container .find-friend-box .friend-box__user, .find-friends-container .find-friend-box .friend-box__cuisine {\n        color: black; }\n", ""]);
+exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\na {\n  text-decoration: none; }\n\n.main-navigation {\n  width: 100%;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n  padding: 5px 0;\n  border-top: 5px solid black;\n  border-bottom: 5px solid black; }\n  .main-navigation a {\n    color: black; }\n\n.main-header {\n  font-size: 4em; }\n\n.button {\n  max-width: 100px;\n  padding: 10px 50px;\n  color: black;\n  margin: 10px auto;\n  border-radius: 5px;\n  font-size: 1em; }\n  .button a {\n    text-decoration: none;\n    color: black; }\n\n.bg-green {\n  background-color: #28a745; }\n\n.bg-blue {\n  background-color: #007bff; }\n\n.main-login-container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%; }\n  .main-login-container .login-box {\n    max-width: 200px;\n    width: 15%;\n    height: auto;\n    text-align: center;\n    border: 2px solid black;\n    padding: 40px 80px;\n    border-radius: 5px; }\n    .main-login-container .login-box .flex-form {\n      display: flex;\n      flex-direction: column; }\n      .main-login-container .login-box .flex-form .form-button {\n        max-width: none;\n        width: 100%; }\n\n.sign-up-container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%; }\n  .sign-up-container .flex-form {\n    display: flex;\n    flex-direction: column;\n    position: relative;\n    width: 250px; }\n    .sign-up-container .flex-form .split-form {\n      display: flex;\n      justify-content: space-between; }\n\n.find-friends-container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column; }\n  .find-friends-container .find-friend-box {\n    height: 80%;\n    width: 30%;\n    border: 2px solid black; }\n    .find-friends-container .find-friend-box .friend-box {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      font-size: 1.5em;\n      padding: 10px;\n      border-bottom: 2px solid black; }\n      .find-friends-container .find-friend-box .friend-box .inner-box {\n        width: 35%;\n        display: flex;\n        justify-content: space-between;\n        align-items: center; }\n      .find-friends-container .find-friend-box .friend-box__user, .find-friends-container .find-friend-box .friend-box__cuisine {\n        color: black; }\n\n.chat-box {\n  height: 90%;\n  position: relative; }\n  .chat-box form {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    width: 100%;\n    position: absolute;\n    bottom: 0; }\n    .chat-box form input {\n      width: 90%;\n      height: 40px;\n      margin: 0 auto; }\n    .chat-box form button {\n      width: 9%;\n      background-color: #28a745;\n      padding: 10px;\n      margin: 0 auto; }\n", ""]);
 
 // exports
 
