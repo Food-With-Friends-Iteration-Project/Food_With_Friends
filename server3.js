@@ -41,7 +41,10 @@ io.on('connection', socket => {
   socket.on('chat message', function(msg) {
     socket.broadcast.emit('broadcast', msg)
   })
-  socket.on('disconnect', () => console.log('disconnected in server'))
+  socket.on('disconnect', () => {
+      console.log('disconnected in server');
+      socket.connect();
+    })
 })
 
 server.listen(PORT, () => console.log(`listening on ${PORT}`))
