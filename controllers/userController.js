@@ -17,8 +17,8 @@ userController.getAllUsers = (req, res) => {
 
 /**
  * getAllUser_Cuisine
- * 
- * 
+ *
+ *
  */
 userController.getUserCuisine = () => {
   // query DB for user/cuisine table
@@ -39,9 +39,18 @@ userController.getUserCuisine = () => {
 
 //TODO: setup error handling
 userController.createUser = (req, res, next) => {
+  console.log('creating user in user controller', req.body);
   userModel.createUser(req.body)
-  .then( data => res.json(data))
-  .catch( err => res.status(400).send('NOT VALID!'));
+  .then( data => {
+    console.log({data});
+    res.json(data)
+    }
+  )
+  .catch( err => {
+    console.log({err});
+    res.end();
+    // res.status(400).send('NOT VALID!')
+  });
   // if (typeof req.body.username === 'string' && typeof req.body.password === 'string') {
   // }
 };
@@ -56,13 +65,14 @@ userController.createUser = (req, res, next) => {
 */
 userController.verifyUser = (req, res, next) => {
   const {email, password_digest} = req.body;
-  
-  console.log(email, password_digest);
+
+  console.log('user controller email and password', email, password_digest);
 
   userModel.findByEmail(email)
   .then( data => {
-    const userPassword = data.password_digest;
-    
+    console.log('returned user', data);
+    const userPassword = data.password;
+
     const isValidLogin = userController.validateLogin(password_digest, userPassword);
 
     res.locals.user_id = data.id
@@ -115,5 +125,3 @@ module.exports = userController;
 //   });
 //   next();
 // };
-
-
