@@ -41,7 +41,7 @@ class SignUp extends Component {
   render() {
     return (
       <div className="sign-up-container">
-        <form className="flex-form" method='POST' action='/sign-up'>
+        <form className="flex-form">
           <div className="split-form" value={this.state.email} onChange={this.changeEmail}>Email:<input type="text" /></div>
           <div className="split-form" value={this.state.password} onChange={this.changePassword}>Password:<input type="text" /></div>
           <button className="button bg-blue" onClick={this.createUser}>Sign Up</button>
