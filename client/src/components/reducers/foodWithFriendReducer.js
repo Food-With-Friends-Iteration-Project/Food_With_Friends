@@ -17,6 +17,8 @@ const initalState = {
   ],
   pw: '',
   user: '',
+  addmsg: '',
+  sendmsg: '',
   cuisine: 'Italian',
   isLoggedIn: true,
 }
@@ -34,7 +36,14 @@ const findFriendsReducer = (state=initalState, action) => {
       let newCurrentPWState = Object.assign({}, state);
       newCurrentPWState.pw = action.pw;
       return newCurrentPWState; 
-
+    case types.AddMessage:
+      let newAddMessageState = Object.assign({}, state);
+      newAddMessageState.addmsg = action.addmsg;
+      return newAddMessageState;
+    case types.sendMessage:
+      let newSendMessageState = Object.assign({}, state);
+      newSendMessageState.sendmsg = action.sendmsg;
+      return newSendMessageState;
     default:
       return state;
   }

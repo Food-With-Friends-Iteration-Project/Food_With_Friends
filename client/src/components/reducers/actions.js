@@ -1,6 +1,8 @@
 const FindFriends = 'FindFriends';
 const CurrentUser = 'CurrentUser';
-const CurrentPW = 'CurrentPW'
+const CurrentPW = 'CurrentPW';
+const AddMessage = 'AddMessage';
+const SendMessage = 'SendMessage';
 
 const findFriends = () => ({types: FindFriends});
 
@@ -14,6 +16,16 @@ const currentUser = (value) => ({
   user: value,
 });
 
+const addMessage = (value) => ({
+  type: AddMessage,
+  addmsg: value,
+});
+
+const sendMessage = (value) => ({
+  type: SendMessage,
+  sendmsg: value,
+})
+
 module.exports = {
   FindFriends,
   findFriends,
@@ -21,4 +33,8 @@ module.exports = {
   currentUser,
   currentPW,
   CurrentPW,
+  addMessage,
+  AddMessage,
+  sendMessage,
+  SendMessage,
 }

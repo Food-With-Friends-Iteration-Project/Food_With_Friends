@@ -227,6 +227,8 @@ var mapStateToProps = function mapStateToProps(store) {
 
 var socket = (0, _socket2.default)(endpoint);
 
+var broadcast = function broadcast(props) {};
+
 socket.on('broadcast', function (msg) {
   $('#messages').append($('<li class="user2" id=' + msg + '>'));
   $('#' + msg).append($('<div>').text(msg));
@@ -254,7 +256,28 @@ var ChatBox = function (_Component) {
   _createClass(ChatBox, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('div', null, _react2.default.createElement('ul', { className: 'msg-box', id: 'messages' }), _react2.default.createElement('form', { className: 'msg-box-form', action: '' }, _react2.default.createElement('input', { className: 'msg-inbox', id: 'm', autoComplete: 'off' }), _react2.default.createElement('button', { type: 'button', id: 'msg-btn-enter', onClick: sendMsg, className: 'button msg-btn bg-green' }, 'Send')));
+      return _react2.default.createElement('div', null, _react2.default.createElement('ul', { className: 'msg-box', id: 'messages' }), _react2.default.createElement('form', { className: 'msg-box-form', action: '' }, _react2.default.createElement('input', {
+        className: 'msg-inbox',
+        id: 'm',
+        autoComplete: 'off',
+        onKeyPress: function onKeyPress(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMsg();
+            console.log('Pressed Enter!');
+          }
+        }
+      }), _react2.default.createElement('button', {
+        type: 'button',
+        id: 'msg-btn-enter',
+        onClick: sendMsg,
+        onKeyPress: function onKeyPress(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            console.log('Pressed Enter!');
+          }
+        },
+        className: 'button msg-btn bg-green' }, 'Send')));
     }
   }]);
 
@@ -573,6 +596,8 @@ exports.default = Header;
 var FindFriends = 'FindFriends';
 var CurrentUser = 'CurrentUser';
 var CurrentPW = 'CurrentPW';
+var AddMessage = 'AddMessage';
+var SendMessage = 'SendMessage';
 
 var findFriends = function findFriends() {
   return { types: FindFriends };
@@ -592,13 +617,31 @@ var currentUser = function currentUser(value) {
   };
 };
 
+var addMessage = function addMessage(value) {
+  return {
+    type: AddMessage,
+    addmsg: value
+  };
+};
+
+var sendMessage = function sendMessage(value) {
+  return {
+    type: SendMessage,
+    sendmsg: value
+  };
+};
+
 module.exports = {
   FindFriends: FindFriends,
   findFriends: findFriends,
   CurrentUser: CurrentUser,
   currentUser: currentUser,
   currentPW: currentPW,
-  CurrentPW: CurrentPW
+  CurrentPW: CurrentPW,
+  addMessage: addMessage,
+  AddMessage: AddMessage,
+  sendMessage: sendMessage,
+  SendMessage: SendMessage
 };
 
 /***/ }),
@@ -646,6 +689,8 @@ var initalState = {
   }],
   pw: '',
   user: '',
+  addmsg: '',
+  sendmsg: '',
   cuisine: 'Italian',
   isLoggedIn: true
 };
@@ -666,7 +711,14 @@ var findFriendsReducer = function findFriendsReducer() {
       var newCurrentPWState = Object.assign({}, state);
       newCurrentPWState.pw = action.pw;
       return newCurrentPWState;
-
+    case types.AddMessage:
+      var newAddMessageState = Object.assign({}, state);
+      newAddMessageState.addmsg = action.addmsg;
+      return newAddMessageState;
+    case types.sendMessage:
+      var newSendMessageState = Object.assign({}, state);
+      newSendMessageState.sendmsg = action.sendmsg;
+      return newSendMessageState;
     default:
       return state;
   }
