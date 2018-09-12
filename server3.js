@@ -8,12 +8,6 @@ const socketIo = require('socket.io');
 const parser = require('socket.io-parser');
 const io = socketIo(server, {'pingInterval': 300000, 'pingTimeout': 300000, 'parser': parser});
 
-
-<<<<<<< HEAD
-
-const app = express();
-=======
->>>>>>> 97863954ee9c47e51a740c958c87fc372deba29f
 const PORT = 3000;
 
 const userController = require('./controllers/userController');
@@ -59,9 +53,6 @@ app.post('/sendText', (req, res) => {
     }
   )
 })
-
-const server = http.createServer(app);
-const io = socketIo(server);
 
 io.on('connection', socket => {
   socket.on('chat message', function(msg) {
