@@ -39,7 +39,7 @@ app.get('/sign-up', (req,res) => {
 app.post('/sendText', (req, res) => {
   console.log('body:', req.body);
   nexmo.message.sendSms(
-    '19082716789', req.body.phone, 'whatup',
+    '19082716789', req.body.phone, req.body.message,
     (err, resData) => {
       if (err){
         console.log({err});

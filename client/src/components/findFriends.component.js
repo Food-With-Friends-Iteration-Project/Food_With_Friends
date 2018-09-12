@@ -20,6 +20,7 @@ class FindFriends extends Component {
 
     this.phoneChange = this.phoneChange.bind(this);
     this.inviteFriend = this.inviteFriend.bind(this);
+    this.textMsgChange = this.textMsgChange.bind(this);
   }
 
   phoneChange(event){
@@ -27,12 +28,17 @@ class FindFriends extends Component {
     console.log('phone: ', this.state.phone);
   }
 
+  textMsgChange(event){
+    this.setState({ textMessage: event.target.value })
+    console.log('message: ', this.state.textMessage);
+  }
+
   inviteFriend() {
   const url='/sendText'
     fetch(url, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ phone: this.state.phone })
+      body: JSON.stringify({ phone: this.state.phone, message: this.state.textMessage })
     }).then((res) => {
       return res.json()
     }).then((jsonRes) => {
@@ -60,6 +66,12 @@ class FindFriends extends Component {
           value={this.state.phone}
           placeholder='phone'
           onChange={this.phoneChange}
+        />
+        <input
+          type='text'
+          value={this.state.textMessage}
+          placeholder='message'
+          onChange={this.textMsgChange}
         />
         <button onClick={this.inviteFriend}>Invite</button>
       </div>
