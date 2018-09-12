@@ -1,11 +1,14 @@
-const bodyParser = require('body-parser');
 const express = require('express');
-const path = require('path');
-
-const http = require('http');
-const socketIo = require('socket.io');
-
 const app = express();
+const bodyParser = require('body-parser');
+const path = require('path');
+const http = require('http');
+const server = http.createServer(app);
+const socketIo = require('socket.io');
+const parser = require('socket.io-parser');
+const io = socketIo(server, {'pingInterval': 300000, 'pingTimeout': 300000, 'parser': parser});
+
+
 const PORT = 3000;
 
 const userController = require('./controllers/userController');
@@ -22,6 +25,7 @@ app.get('/login', cuisineController.getAll);
 
 app.get('/admin', userController.getAllUsers);
 
+
 app.post('/sign-up', userController.createUser);
 
 app.post('/login', userController.verifyUser, cuisineController.getID, userCuisineController.add, (req,res) => {
@@ -34,14 +38,14 @@ app.get('/sign-up', (req,res) => {
   res.sendFile(path.join(__dirname + '/views/sign-up.html'));
 })
 
-const server = http.createServer(app);
-const io = socketIo(server);
-
 io.on('connection', socket => {
   socket.on('chat message', function(msg) {
     socket.broadcast.emit('broadcast', msg)
   })
-  socket.on('disconnect', () => console.log('disconnected in server'))
+  socket.on('disconnect', () => console.log('disconnected from chat server'));
+  socket.on('ping', msg => {
+    alert(msg);
+  });
 })
 
 server.listen(PORT, () => console.log(`listening on ${PORT}`))

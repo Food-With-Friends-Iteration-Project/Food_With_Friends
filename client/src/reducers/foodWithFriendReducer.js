@@ -1,4 +1,4 @@
-import * as types from './actions.js';
+import * as types from '../actions/actions.js';
 
 const initalState = {
   users: [
@@ -34,7 +34,6 @@ const findFriendsReducer = (state=initalState, action) => {
       let newCurrentPWState = Object.assign({}, state);
       newCurrentPWState.pw = action.pw;
       return newCurrentPWState; 
-
     default:
       return state;
   }
