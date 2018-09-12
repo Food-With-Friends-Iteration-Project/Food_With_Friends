@@ -1,0 +1,1 @@
+const crocs = 'Crocs suck in the rain!';
