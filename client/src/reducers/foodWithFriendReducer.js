@@ -1,4 +1,4 @@
-import * as types from './actions.js';
+import * as types from '../actions/actions.js';
 
 const initalState = {
   users: [

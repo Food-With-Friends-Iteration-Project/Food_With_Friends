@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import store from './store';
 import {connect} from 'react-redux';
-import * as types from './reducers/actions';
+import * as types from '../actions/actions.js';
 import {Route, Redirect} from 'react-redux';
 
 const mapDispatchToProps = (store) => ({friends: store.friends});
