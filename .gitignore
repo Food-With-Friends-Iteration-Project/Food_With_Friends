@@ -59,6 +59,3 @@ typings/
 
 # next.js build output
 .next
-
-/build/bundle.js
-/build/bundle.js.map
