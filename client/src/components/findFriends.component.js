@@ -43,6 +43,7 @@ class FindFriends extends Component {
       return res.json()
     }).then((jsonRes) => {
       console.log({jsonRes});
+      this.setState({ phone: '', textMessage: '' })
     }).catch((err) => {
       console.log({err});
     })
@@ -57,10 +58,15 @@ class FindFriends extends Component {
     }
     return (
       <div className="find-friends-container">
-        <div className="main-header">Find Friends</div>
-        <div className="find-friend-box">
-          {friendsArr}
+        <div style={{ flex: 2}}>
+          <div className="main-header">Find Friends</div>
+          <div className="find-friend-box">
+            {friendsArr}
+          </div>
         </div>
+
+      <div>
+        <h2>Text a Friend </h2>
         <input
           type='text'
           value={this.state.phone}
@@ -74,6 +80,8 @@ class FindFriends extends Component {
           onChange={this.textMsgChange}
         />
         <button onClick={this.inviteFriend}>Invite</button>
+      </div>
+
       </div>
     )
   }
