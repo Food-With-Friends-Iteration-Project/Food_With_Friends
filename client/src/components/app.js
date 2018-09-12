@@ -4,9 +4,6 @@ import Main from './main.js';
 
 const App = () => {
 
-// fetch('/admin')
-// .then( resp => resp.json())
-// .then( resp => console.log(resp))
 
 return ( 
   <div>

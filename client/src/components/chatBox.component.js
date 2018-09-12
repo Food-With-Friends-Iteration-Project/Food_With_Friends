@@ -11,8 +11,10 @@ const mapStateToProps = store => ({
 const socket = socketIOClient(endpoint);
 
 const broadcast = props => {
-  
+  console.log(props);
 }
+
+console.log(broadcast);
 
 socket.on('broadcast', function(msg) {
   $('#messages').append($('<li class="user2" id='+ msg +'>'));
