@@ -36,16 +36,17 @@ app.get('/sign-up', (req,res) => {
   res.sendFile(path.join(__dirname + '/views/sign-up.html'));
 })
 
-app.get('/sendText', (req, res) => {
+app.post('/sendText', (req, res) => {
+  console.log('body:', req.body);
   nexmo.message.sendSms(
-    '19082716789', '16467059702', 'whatup',
+    '19082716789', req.body.phone, 'whatup',
     (err, resData) => {
       if (err){
         console.log({err});
-        res.end()
+        res.send(err)
       } else {
         console.log({resData});
-        res.end()
+        res.send(resData)
       }
     }
   )
