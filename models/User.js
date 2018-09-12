@@ -4,26 +4,28 @@ module.exports = {
 
   findAllUsers: () => {
     return db.any(`
-      SELECT * FROM "user"`);
+      SELECT * FROM "users"`);
   },
 
   createUser: (user) => {
+    console.log('creating user in Model', user);
     return db.one(`
-    INSERT INTO "user" (email, password_digest) 
+    INSERT INTO "users" (email, password)
     VALUES ($/email/, $/password_digest/)
     RETURNING *`,user)
   },
-  
+
   findByEmail: (email) => {
+    console.log('finding by email', email);
     return db.one(`
-    SELECT * 
-    FROM "user" 
+    SELECT *
+    FROM "users"
     WHERE email = $1`, email)
   },
 
   deleteUsers: () => {
     return db.query(`
-    DELETE FROM user; 
+    DELETE FROM users;
     `)
   }
 

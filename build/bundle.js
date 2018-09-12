@@ -765,16 +765,60 @@ function _inherits(subClass, superClass) {
 var SignUp = function (_Component) {
   _inherits(SignUp, _Component);
 
-  function SignUp() {
+  function SignUp(props) {
     _classCallCheck(this, SignUp);
 
-    return _possibleConstructorReturn(this, (SignUp.__proto__ || Object.getPrototypeOf(SignUp)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SignUp.__proto__ || Object.getPrototypeOf(SignUp)).call(this, props));
+
+    _this.state = {
+      email: '',
+      password: ''
+    };
+    _this.createUser = _this.createUser.bind(_this);
+    _this.changeEmail = _this.changeEmail.bind(_this);
+    _this.changePassword = _this.changePassword.bind(_this);
+    return _this;
   }
 
   _createClass(SignUp, [{
+    key: 'createUser',
+    value: function createUser() {
+      var _this2 = this;
+
+      console.log("createUser in signup component");
+      var _state = this.state,
+          email = _state.email,
+          password = _state.password;
+
+      var url = '/sign-up';
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password_digest: password })
+      }).then(function (res) {
+        return res.json();
+      }).then(function (json_resp) {
+        console.log({ json_resp: json_resp });
+        _this2.setState({ password: '' });
+        _this2.setState({ email: '' });
+      }).catch(function (err) {
+        console.log('error from sign-up request', err);
+      });
+    }
+  }, {
+    key: 'changeEmail',
+    value: function changeEmail(event) {
+      this.setState({ email: event.target.value });
+    }
+  }, {
+    key: 'changePassword',
+    value: function changePassword(event) {
+      this.setState({ password: event.target.value });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('div', { className: 'sign-up-container' }, _react2.default.createElement('form', { className: 'flex-form', method: 'POST', action: '/sign-up' }, _react2.default.createElement('div', { className: 'split-form' }, 'Email:', _react2.default.createElement('input', { type: 'text' })), _react2.default.createElement('div', { className: 'split-form' }, 'Password:', _react2.default.createElement('input', { type: 'text' })), _react2.default.createElement('div', { className: 'button bg-blue' }, 'Sign Up')));
+      return _react2.default.createElement('div', { className: 'sign-up-container' }, _react2.default.createElement('form', { className: 'flex-form' }, _react2.default.createElement('div', { className: 'split-form', value: this.state.email, onChange: this.changeEmail }, 'Email:', _react2.default.createElement('input', { type: 'text' })), _react2.default.createElement('div', { className: 'split-form', value: this.state.password, onChange: this.changePassword }, 'Password:', _react2.default.createElement('input', { type: 'text' })), _react2.default.createElement('button', { className: 'button bg-blue', onClick: this.createUser }, 'Sign Up')));
     }
   }]);
 
