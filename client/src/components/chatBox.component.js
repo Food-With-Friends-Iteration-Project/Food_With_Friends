@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import socketIOClient from "socket.io-client";
 
-
 let endpoint = "http://localhost:3000";
 
 const mapStateToProps = store => ({
@@ -10,6 +9,12 @@ const mapStateToProps = store => ({
 })
 
 const socket = socketIOClient(endpoint);
+
+const broadcast = props => {
+  console.log(props);
+}
+
+console.log(broadcast);
 
 socket.on('broadcast', function(msg) {
   $('#messages').append($('<li class="user2" id='+ msg +'>'));
@@ -32,7 +37,31 @@ class ChatBox extends Component {
       <div>
         <ul className="msg-box" id="messages"></ul>
         <form className="msg-box-form" action="">
-          <input className="msg-inbox" id="m" autoComplete="off" /><button type="button" id="msg-btn-enter" onClick={sendMsg} className="button msg-btn bg-green">Send</button>
+          <input 
+            className="msg-inbox" 
+            id="m" 
+            autoComplete="off" 
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMsg();
+                console.log('Pressed Enter!');
+              }
+            }} 
+          />
+          <button 
+            type="button" 
+            id="msg-btn-enter"
+            onClick={sendMsg}
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                console.log('Pressed Enter!');
+              }
+            }} 
+            className="button msg-btn bg-green">
+            Send
+          </button>
         </form>
       </div>
     );
